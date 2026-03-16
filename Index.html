@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathezweig – Mein Vortrag</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --accent: #f0b429;
+    --accent2: #3ec9a7;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --border: #30363d;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 80px 40px 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(240,180,41,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(240,180,41,0.4);
+    border-radius: 100px;
+    padding: 4px 14px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero .subtitle {
+    margin-top: 18px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+    margin: 0 auto 48px;
+  }
+
+  /* SECTIONS */
+  .sections {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.33s; }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    border-radius: 4px 0 0 4px;
+  }
+
+  .card .num {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .card p {
+    color: #c9d1d9;
+    font-size: 1.0rem;
+    line-height: 1.75;
+  }
+  .card p + p { margin-top: 12px; }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: linear-gradient(135deg, rgba(240,180,41,0.1), rgba(62,201,167,0.07));
+    border: 1px solid rgba(240,180,41,0.25);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+
+  /* BERUFE GRID */
+  .jobs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .job-chip {
+    background: rgba(62,201,167,0.08);
+    border: 1px solid rgba(62,201,167,0.25);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    color: var(--accent2);
+    text-align: center;
+  }
+
+  /* CLOSING */
+  .closing {
+    max-width: 820px;
+    margin: 40px auto 0;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .closing p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .closing p strong { color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* PRINT / VORTRAGSTEXT BUTTON */
+  .toggle-btn {
+    display: block;
+    margin: 48px auto 0;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .toggle-btn:hover { background: var(--accent); color: var(--bg); }
+
+  /* VORTRAGSTEXT */
+  .speech {
+    display: none;
+    max-width: 820px;
+    margin: 32px auto 0;
+    padding: 36px 36px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    font-size: 1.0rem;
+    line-height: 1.85;
+    color: #c9d1d9;
+  }
+  .speech.visible { display: block; }
+  .speech h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin: 24px 0 6px;
+  }
+  .speech h3:first-child { margin-top: 0; }
+  .speech p { margin-bottom: 10px; }
+  .speech .note {
+    display: inline-block;
+    background: rgba(240,180,41,0.1);
+    border-left: 3px solid var(--accent);
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    color: var(--accent);
+    border-radius: 0 6px 6px 0;
+    margin: 8px 0;
+  }
+
+  .sections-wrapper { padding: 0 24px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="tag">Kurzvortrag für 6. Klässler</div>
+  <h1>Der <span>Mathe&shy;zweig</span> an der Realschule</h1>
+  <p class="subtitle">Was er ist, warum ich ihn gewählt habe – und was er dir ermöglicht.</p>
+</div>
+<div class="divider"></div>
+
+<!-- CARDS -->
+<div class="sections">
+
+  <div class="card">
+    <div class="num">01 · Was ist das?</div>
+    <h2>Der Mathezweig – was steckt dahinter?</h2>
+    <p>Der Mathezweig ist einer von drei Zweigen an der bayerischen Realschule – neben dem Wirtschafts- und dem Fremdsprachenzweig. Ab der 7. Klasse bekommt ihr mehr Mathematik und dazu naturwissenschaftliche Fächer wie Physik und Chemie in vertiefter Form.</p>
+    <p>Konkret heißt das: mehr Wochenstunden Mathe, mehr Aufgaben, mehr logisches Denken – aber auch mehr Erfolgserlebnisse, wenn man einen schwierigen Beweis endlich kapiert hat.</p>
+    <div class="highlight">✦ Mathe im Mathezweig ist kein Pauken – es ist Puzzeln.</div>
+  </div>
+
+  <div class="card">
+    <div class="num">02 · Warum ich?</div>
+    <h2>Warum ich den Mathezweig gewählt habe</h2>
+    <p>Ich habe mich für den Mathezweig entschieden, weil mir Mathe schon in der Grundschule Spaß gemacht hat – nicht weil ich immer alles sofort konnte, sondern weil ich es gut finde, wenn man für eine Aufgabe wirklich nachdenken muss.</p>
+    <p>Außerdem interessiert mich, wie die Welt „funktioniert": Warum fliegt ein Flugzeug? Wie berechnet ein Navi die schnellste Route? Für solche Fragen braucht man Mathe und Physik – und genau die bekommt man im Mathezweig.</p>
+
+  </div>
+
+  <div class="card">
+    <div class="num">03 · Was ist besonders?</div>
+    <h2>Was den Mathezweig besonders macht</h2>
+    <p>Ihr trainiert systematisches Denken – Schritt für Schritt ein Problem lösen, ohne den Überblick zu verlieren. Das klingt trocken, aber es ist eigentlich eine Superkraft: Wer gut strukturiert denken kann, kommt in fast jedem Beruf weiter.</p>
+    <p>Dazu kommt: Der Abschluss im Mathezweig öffnet besonders viele Türen in Richtung Technik, IT und Naturwissenschaften – Bereiche, in denen man heute und in Zukunft sehr gefragt ist.</p>
+    <div class="highlight">✦ Logisches Denken ist in jedem Job ein Vorteil – egal ob Arzt, Programmierer oder Unternehmer.</div>
+  </div>
+
+  <div class="card">
+    <div class="num">04 · Was kommt danach?</div>
+    <h2>Was man nach der Schule damit machen kann</h2>
+    <p>Mit dem Realschulabschluss aus dem Mathezweig habt ihr sehr gute Chancen auf eine Ausbildung oder ein Studium in vielen interessanten Bereichen:</p>
+    <div class="jobs">
+      <div class="job-chip">👨‍💻 Informatik / IT</div>
+      <div class="job-chip">⚙️ Maschinenbau</div>
+      <div class="job-chip">🔌 Elektrotechnik</div>
+      <div class="job-chip">🏗️ Bauingenieur</div>
+      <div class="job-chip">🔬 Chemielabor</div>
+      <div class="job-chip">📐 Techniker</div>
+      <div class="job-chip">💊 Pharmazie</div>
+      <div class="job-chip">📊 Controlling</div>
+      <div class="job-chip">🚀 Luft- & Raumfahrt</div>
+    </div>
+    <p style="margin-top:16px;">Außerdem kann man nach der Realschule die Fachoberschule (FOS) besuchen und dann studieren – viele Mathezweig-Absolventen machen genau das.</p>
+  </div>
+
+  <div class="card">
+    <div class="num">05 · Mein Tipp</div>
+    <h2>Was ich euch mitgeben möchte</h2>
+    <p>Wählt den Zweig, der zu euch passt – nicht den, den eure Freunde wählen. Wenn euch Zahlen, Formeln und das Knobeln an Problemen Spaß machen, ist der Mathezweig genau richtig für euch.</p>
+    <p>Es ist manchmal anstrengend – das will ich nicht verschweigen. Aber wenn man eine schwierige Aufgabe geknackt hat, ist das Gefühl richtig gut. Und das Wissen, das man mitnimmt, ist etwas, das man sein Leben lang nutzen kann.</p>
+    <div class="highlight">✦ Habt ihr Fragen? Ich beantworte sie gerne!</div>
+  </div>
+
+</div>
+
+<!-- VORTRAGSTEXT BUTTON -->
+<div style="max-width:820px; margin:0 auto; padding: 0 24px; text-align:center;">
+  <button class="toggle-btn" onclick="toggleSpeech()">📄 Vortragstext zum Vorlesen anzeigen</button>
+</div>
+
+<!-- VORTRAGSTEXT -->
+<div class="speech" id="speechText" style="max-width:820px; margin:32px auto 0; padding: 0 24px;">
+<div style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:36px;">
+  <h3>Einleitung</h3>
+  <p>Hallo zusammen! Mein Name ist Nils, ich bin in der 10a und ich bin im Mathezweig. Heute möchte ich euch kurz erzählen, was das eigentlich ist, warum ich mich dafür entschieden habe – und was man damit anfangen kann.</p>
+
+  <h3>Was ist der Mathezweig?</h3>
+  <p>An der bayerischen Realschule könnt ihr ab der 7. Klasse zwischen drei Zweigen wählen: dem Wirtschaftszweig, dem Fremdsprachenzweig und dem Mathezweig. Ich bin im Mathezweig – und das bedeutet: mehr Mathe, mehr Physik, mehr Naturwissenschaften.</p>
+  <p>Aber „mehr Mathe" heißt nicht, dass man einfach mehr rechnet. Es geht viel ums Denken: Wie löse ich ein Problem Schritt für Schritt? Wie erkenne ich, was gesucht ist? Das macht tatsächlich Spaß – wenn man sich drauf einlässt.</p>
+
+  <h3>Warum habe ich den Mathezweig gewählt?</h3>
+  <p>Ich habe den Mathezweig gewählt, weil mir Mathe schon immer etwas bedeutet hat. Nicht weil ich nie Fehler mache – sondern weil ich es mag, wenn eine Aufgabe einen fordert. Wenn man dann die Lösung findet, ist das wie ein kleines Erfolgserlebnis.</p>
+  <p>Außerdem interessiert mich, wie Dinge funktionieren. Warum hält eine Brücke? Wie berechnet ein Computer eine Route? Für solche Fragen braucht man Mathe – und im Mathezweig lernt man genau das.</p>
+
+  <h3>Was ist das Besondere?</h3>
+  <p>Das Besondere am Mathezweig ist, dass man lernt, strukturiert zu denken. Das klingt vielleicht langweilig – ist es aber nicht. Wer gut denken kann, wer Probleme logisch angeht, der hat in fast jedem Beruf einen Vorteil. Das ist eine Fähigkeit, die einem niemand mehr wegnehmen kann.</p>
+
+  <h3>Was kann man danach machen?</h3>
+  <p>Mit dem Mathezweig-Abschluss habt ihr viele Möglichkeiten: Ausbildung in IT, Elektrotechnik, Maschinenbau oder Chemie zum Beispiel. Oder ihr geht auf die Fachoberschule und studiert danach – Informatik, Ingenieurswesen, Physik, oder was auch immer euch interessiert.</p>
+  <p>Die Berufsfelder, die Mathe und Technik brauchen, gehören zu den gefragtesten und bestbezahlten – das ist ein ehrlicher Vorteil.</p>
+
+  <h3>Abschluss</h3>
+  <p>Mein Tipp an euch: Überlegt, was euch wirklich interessiert – und wählt dann den Zweig, der dazu passt. Wenn euch Zahlen und Knobeln Spaß machen, ist der Mathezweig eine tolle Wahl. Habt ihr noch Fragen? Ich beantworte sie gerne!</p>
+  <div class="note">⏱ Redezeit: ca. 3–4 Minuten</div>
+</div>
+</div>
+
+<!-- CLOSING QUOTE -->
+<div class="closing" style="margin-top:48px;">
+  <p>„Mathematik ist nicht das <strong>Auswendiglernen von Formeln</strong> –<br>sie ist die Kunst, <strong>klug zu denken.</strong>"</p>
+</div>
+
+<script>
+  function toggleSpeech() {
+    const el = document.getElementById('speechText');
+    const btn = document.querySelector('.toggle-btn');
+    el.classList.toggle('visible');
+    btn.textContent = el.classList.contains('visible')
+      ? '📄 Vortragstext ausblenden'
+      : '📄 Vortragstext zum Vorlesen anzeigen';
+  }
+</script>
+</body>
+</html>
